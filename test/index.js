@@ -1,4 +1,5 @@
 var spawn = require('child_process').spawn
+var parseArgs = require('shell-quote').parse
 var supertest = require('supertest')
 var WebSocketClient = require('websocket').client
 var pkg = require('../package.json')
@@ -9,7 +10,7 @@ var webSocketClient = new WebSocketClient()
 var procs = []
 
 function h (str) {
-  var args = [__dirname + '/../' + pkg.bin.h].concat(str.split(' '))
+  var args = [__dirname + '/../' + pkg.bin.h].concat(parseArgs(str))
   var opts = {
     cwd: __dirname + '/one',
     stdio: 'inherit'
